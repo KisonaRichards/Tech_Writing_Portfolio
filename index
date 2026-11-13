@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Writing Portfolio | Documentation &amp; Procedures</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slate: {
+              850: '#172033',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Smooth tab panel fade-in */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tab-panel-animate {
+      animation: fadeIn 0.22s ease-out forwards;
+    }
+    /* Custom scrollbar for horizontal tab bar on narrow screens */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- Top Navigation / Header Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center justify-center w-7 h-7 rounded bg-slate-900 text-white font-mono text-xs font-semibold">DOC</span>
+        <span class="font-semibold text-slate-900 tracking-tight text-sm sm:text-base">Technical Writing Portfolio</span>
+      </div>
+      <nav class="flex items-center gap-4 text-xs sm:text-sm text-slate-600">
+        <a href="#about" class="hover:text-blue-600 transition-colors font-medium">Profile</a>
+        <a href="#samples" class="hover:text-blue-600 transition-colors font-medium">Writing Samples</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 sm:space-y-12">
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: TOP HERO / PROFILE SECTION                                 -->
+    <!-- ===================================================================== -->
+    <section id="about" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 sm:p-8 lg:p-10">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-7 lg:gap-10">
+        
+        <!-- Left Column: Portrait Image & Interactive Photo Uploader -->
+        <div class="flex flex-col items-center shrink-0">
+          <div class="relative group w-40 h-40 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-inner flex items-center justify-center">
+            <!-- Default Professional Placeholder Graphic (Shown until user uploads photo) -->
+            <div id="avatar-placeholder" class="flex flex-col items-center justify-center text-slate-400 p-4 text-center select-none">
+              <svg class="w-16 h-16 text-slate-300 mb-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+              </svg>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Your Portrait</span>
+            </div>
+
+            <!-- Uploaded Image Element -->
+            <img
+              id="profile-photo"
+              src=""
+              alt="Technical Writer Portrait"
+              class="hidden w-full h-full object-cover"
+            />
+
+            <!-- Hover Overlay Trigger -->
+            <label
+              for="photo-upload-input"
+              class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity flex flex-col items-center justify-center text-white text-xs font-medium cursor-pointer p-2 text-center"
+            >
+              <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+              </svg>
+              <span>Upload Photo</span>
+            </label>
+          </div>
+
+          <!-- Accessible Button below photo for mobile/touch users -->
+          <label
+            for="photo-upload-input"
+            class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs font-medium text-slate-600 cursor-pointer transition-colors"
+          >
+            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+            </svg>
+            <span>Add / Replace Photo</span>
+          </label>
+          <input id="photo-upload-input" type="file" accept="image/*" class="hidden" />
+        </div>
+
+        <!-- Right Column: Bio Write-Up & Skills -->
+        <div class="flex-1 text-center md:text-left space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-xs font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+            Technical Writer &amp; Documentation Specialist
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+            Clear, Step-by-Step Technical Documentation
+          </h1>
+
+          <p class="text-slate-700 text-base sm:text-[17px] leading-relaxed">
+            With my diploma in Computer Information Systems, so I understand how technical systems work. I write clear, step-by-step procedures that people can follow without guessing. I like turning complicated or messy information into instructions that are easy to use and hard to misread.
+          </p>
+
+          <!-- Skills Section -->
+          <div class="pt-2 border-t border-slate-100">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold mb-3">
+              Core Skills &amp; Tools
+            </h2>
+            <div class="flex flex-wrap justify-center md:justify-start gap-2">
+              <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium">
+                Procedure and work instruction writing
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium">
+                Editing and rewriting
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium">
+                Document formatting and consistency
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-blue-50/70 border border-blue-200 text-blue-900 text-xs sm:text-sm font-medium font-mono">
+                Microsoft Word
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-blue-50/70 border border-blue-200 text-blue-900 text-xs sm:text-sm font-medium font-mono">
+                Visio
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-blue-50/70 border border-blue-200 text-blue-900 text-xs sm:text-sm font-medium font-mono">
+                Adobe Acrobat
+              </span>
+              <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium">
+                Working with technical information
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: PORTFOLIO WORK SAMPLES (LINED & LABELED TABS)              -->
+    <!-- ===================================================================== -->
+    <section id="samples" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-wider text-blue-600 font-semibold">Portfolio Artifacts</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Selected Writing Samples</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-500">Select a tab below to inspect each documentation sample.</p>
+      </div>
+
+      <!-- Main Tabbed Document Container -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        
+        <!-- Lined & Labeled Tab Bar -->
+        <div role="tablist" aria-label="Technical Writing Samples" class="flex overflow-x-auto no-scrollbar border-b border-slate-200 bg-slate-50/80 px-2 sm:px-4 pt-2">
+          
+          <!-- Tab 1 Button -->
+          <button
+            type="button"
+            role="tab"
+            id="tab-btn-1"
+            aria-selected="true"
+            aria-controls="tab-panel-1"
+            onclick="switchTab(1)"
+            class="tab-btn group relative flex items-center gap-2.5 px-4 py-3.5 text-left border-b-2 border-blue-600 text-blue-700 font-semibold text-sm whitespace-nowrap transition-all focus:outline-none"
+          >
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-blue-600 text-white font-mono text-xs">1</span>
+            <span>Connect Windows 11 to Wi-Fi <span class="hidden sm:inline text-xs font-normal text-slate-500 ml-1">(SOP)</span></span>
+          </button>
+
+          <!-- Tab 2 Button -->
+          <button
+            type="button"
+            role="tab"
+            id="tab-btn-2"
+            aria-selected="false"
+            aria-controls="tab-panel-2"
+            onclick="switchTab(2)"
+            class="tab-btn group relative flex items-center gap-2.5 px-4 py-3.5 text-left border-b-2 border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300 font-medium text-sm whitespace-nowrap transition-all focus:outline-none"
+          >
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-slate-200 text-slate-700 group-hover:bg-slate-300 font-mono text-xs">2</span>
+            <span>Original vs. Revised PB&amp;J Procedure <span class="hidden sm:inline text-xs font-normal text-slate-400 ml-1">(Rewrite)</span></span>
+          </button>
+
+          <!-- Tab 3 Button -->
+          <button
+            type="button"
+            role="tab"
+            id="tab-btn-3"
+            aria-selected="false"
+            aria-controls="tab-panel-3"
+            onclick="switchTab(3)"
+            class="tab-btn group relative flex items-center gap-2.5 px-4 py-3.5 text-left border-b-2 border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300 font-medium text-sm whitespace-nowrap transition-all focus:outline-none"
+          >
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-slate-200 text-slate-700 group-hover:bg-slate-300 font-mono text-xs">3</span>
+            <span>Wi-Fi Connected but No Internet <span class="hidden sm:inline text-xs font-normal text-slate-400 ml-1">(Flowchart)</span></span>
+          </button>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 1 PANEL: Connect a Windows 11 Computer to Wi-Fi               -->
+        <!-- ================================================================= -->
+        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-btn-1" class="tab-panel tab-panel-animate p-6 sm:p-8 lg:p-10 space-y-6">
+          
+          <!-- Document Control Header -->
+          <div class="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-wider text-slate-500 block mb-1">Standard Operating Procedure</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Connect a Windows 11 Computer to Wi-Fi</h3>
+            </div>
+            <div class="inline-flex items-center px-3 py-1.5 rounded bg-slate-100 border border-slate-200 font-mono text-xs text-slate-700 font-medium self-start sm:self-center">
+              Revision A | Estimated time: 2 minutes
+            </div>
+          </div>
+
+          <!-- Purpose & Audience Block -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 border border-slate-200 rounded-lg p-4 sm:p-5">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Purpose</span>
+              <p class="text-sm sm:text-base text-slate-800">To connect a Windows 11 computer to a Wi-Fi network.</p>
+            </div>
+            <div>
+              <span class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Audience</span>
+              <p class="text-sm sm:text-base text-slate-800">Anyone with a laptop who is not familiar with network settings.</p>
+            </div>
+          </div>
+
+          <!-- Prerequisites ("You need") -->
+          <div class="space-y-2">
+            <h4 class="text-base font-bold text-slate-900">You need:</h4>
+            <ul class="list-disc list-inside space-y-1 text-sm sm:text-base text-slate-700 pl-1">
+              <li>The name of the Wi-Fi network</li>
+              <li>The Wi-Fi password</li>
+            </ul>
+          </div>
+
+          <!-- NOTE Callout -->
+          <div class="flex items-start gap-3 p-4 rounded-lg bg-blue-50 border-l-4 border-blue-600 text-blue-950">
+            <svg class="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+            </svg>
+            <p class="text-sm sm:text-base">
+              <strong class="font-mono uppercase tracking-wide text-blue-800 mr-1">NOTE:</strong>
+              The password is case-sensitive. Capital and lowercase letters must match exactly.
+            </p>
+          </div>
+
+          <!-- Procedure Steps -->
+          <div class="space-y-3">
+            <h4 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">Steps</h4>
+            <ol class="space-y-3">
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">1</span>
+                <span class="text-sm sm:text-base text-slate-800">Click the network icon in the bottom-right corner of the screen, next to the clock.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">2</span>
+                <span class="text-sm sm:text-base text-slate-800">Click the arrow (<code class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded font-mono text-xs">&gt;</code>) next to the Wi-Fi button. A list of available networks appears.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">3</span>
+                <span class="text-sm sm:text-base text-slate-800">Click the name of your network.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">4</span>
+                <span class="text-sm sm:text-base text-slate-800">Select <strong>Connect</strong>.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">5</span>
+                <span class="text-sm sm:text-base text-slate-800">Type the password.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">6</span>
+                <span class="text-sm sm:text-base text-slate-800">Select <strong>Next</strong>.</span>
+              </li>
+              <li class="flex items-start gap-3.5">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold shrink-0 mt-0.5">7</span>
+                <span class="text-sm sm:text-base text-slate-800">Wait for the word <strong>Connected</strong> to appear under the network name.</span>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Verification Section -->
+          <div class="p-4 sm:p-5 rounded-lg bg-emerald-50/80 border border-emerald-200 space-y-1.5">
+            <div class="flex items-center gap-2 text-emerald-800 font-bold text-base">
+              <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h4>Verification</h4>
+            </div>
+            <p class="text-sm sm:text-base text-emerald-950">
+              The procedure is complete when the network icon shows the Wi-Fi symbol and <strong>Connected</strong> appears under the network name.
+            </p>
+          </div>
+
+          <!-- Troubleshooting Table ("If It Does Not Work") -->
+          <div class="space-y-3">
+            <h4 class="text-lg font-bold text-slate-900">If It Does Not Work</h4>
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 text-xs sm:text-sm font-mono uppercase">
+                    <th class="py-3 px-4 font-semibold w-2/5 border-r border-slate-200">Problem</th>
+                    <th class="py-3 px-4 font-semibold w-3/5">What to do</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 text-sm sm:text-base">
+                  <tr class="hover:bg-slate-50/70">
+                    <td class="py-3 px-4 font-medium text-slate-900 border-r border-slate-200">Network name is not in the list</td>
+                    <td class="py-3 px-4 text-slate-700">Make sure Wi-Fi is turned on and Airplane mode is off.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/70">
+                    <td class="py-3 px-4 font-medium text-slate-900 border-r border-slate-200">“Can’t connect to this network”</td>
+                    <td class="py-3 px-4 text-slate-700">Select the network and choose <strong>Forget</strong>, then repeat the steps.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/70">
+                    <td class="py-3 px-4 font-medium text-slate-900 border-r border-slate-200">Password rejected</td>
+                    <td class="py-3 px-4 text-slate-700">Re-enter the password and check capital letters.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/70">
+                    <td class="py-3 px-4 font-medium text-slate-900 border-r border-slate-200">Still does not work</td>
+                    <td class="py-3 px-4 text-slate-700">
+                      See the troubleshooting flowchart on the next page.
+                      <button
+                        type="button"
+                        onclick="switchTab(3)"
+                        class="ml-2 inline-flex items-center gap-1 text-xs font-mono font-medium text-blue-600 hover:text-blue-800 underline underline-offset-2"
+                      >
+                        Open Flowchart &rarr;
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 2 PANEL: Before & After Rewrite (PB&J Procedure)              -->
+        <!-- ================================================================= -->
+        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-btn-2" class="tab-panel hidden tab-panel-animate p-6 sm:p-8 lg:p-10 space-y-8">
+          
+          <!-- Layout View Toggle (Stacked vs Side-by-Side on Desktop) -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-wider text-blue-600 font-semibold">Editing &amp; Restructuring Sample</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Procedure Rewrite: Unstructured Draft to Standard SOP</h3>
+            </div>
+            <div class="hidden lg:inline-flex items-center rounded-lg border border-slate-200 bg-slate-100 p-1 self-start">
+              <button
+                type="button"
+                id="view-stacked-btn"
+                onclick="setRewriteLayout('stacked')"
+                class="px-3 py-1.5 rounded-md text-xs font-medium bg-white text-slate-900 shadow-sm transition-all"
+              >
+                Stacked View
+              </button>
+              <button
+                type="button"
+                id="view-split-btn"
+                onclick="setRewriteLayout('split')"
+                class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 transition-all"
+              >
+                Side-by-Side Comparison
+              </button>
+            </div>
+          </div>
+
+          <div id="rewrite-container" class="grid grid-cols-1 gap-8">
+            
+            <!-- PAGE 2: SAMPLE 1, ORIGINAL PROCEDURE -->
+            <article class="border border-slate-300 rounded-xl bg-slate-50/70 p-5 sm:p-7 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded bg-slate-200 text-slate-800 font-mono text-xs font-semibold">Page 2</span>
+                  <h4 class="text-base sm:text-lg font-bold text-slate-900">Sample 1, Original Procedure</h4>
+                </div>
+                <span class="font-mono text-xs text-slate-500">Unformatted Wall-of-Text Draft</span>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 text-sm sm:text-[15px] text-slate-700 leading-relaxed font-normal shadow-inner">
+                Go to the kitchen. Locate the refrigerator. Use the handles to open the door of the refrigerator. Locate the peanut butter, pick it up. Locate the jelly of choice, pick it up, place it on the kitchen counter. Close the refrigerator. Walk over to the pantry. Locate the loaf of bread. Pick it up and place it nearby the peanut butter and jelly that you previously placed on the counter. Close the pantry. Go to the utensil drawer, pick up a knife, close the utensil drawer. Open the plates cupboard. Pick up a flat surfaced plate. Close the plate cupboards. Place the plate on the counter nearby the bread, jelly, and peanut butter. Place the knife on top of the plate. Pick up the bread, open the bread bag. If the loaf is already pre-sliced, retrieve from the bag the total number of slices that you would like for your sandwich. If it is not, place the loaf on the counter and cut as many slices as you would like. Place the knife on top of the bread. Move in a back and forth motion until a clean slice is made through the bread. Continue that step for the total number of slices that you would like. Place the slices of bread on the plate. Place the knife beside the plate. Open the peanut butter, open the jelly. Pick up the knife, put the knife in the peanut butter. Swirl it along the sides of the container. Pull the knife out of the peanut butter and wipe the peanut butter on the bread. Ensure to work it completely around the bread so it fills all edges. Grab a paper towel, remove any excess peanut butter from the knife. Open the jam, put the cover to the side. Put the knife into the jam. Run the knife along the side of the container, pull it out, and smear the jelly on top of the peanut butter. Ensure to smear it evenly so peanut butter covers, so that the jelly covers the entire surface of the bread. Pick up the other slice of bread, put it on top and there you have a peanut butter jelly sandwich
+              </div>
+
+              <!-- Context Note -->
+              <div class="flex items-start gap-2.5 p-3.5 rounded-lg bg-amber-50/70 border border-amber-200 text-amber-950 text-xs sm:text-sm">
+                <span class="font-mono font-semibold uppercase text-amber-800 shrink-0">Context note:</span>
+                <p>This is my first draft of a procedure for making a peanut butter and jelly sandwich. I wrote it as a technical procedure with prerequisites, phases, a decision step, and a verification section.</p>
+              </div>
+            </article>
+
+            <!-- PAGE 3: SAMPLE 2, REVISED PROCEDURE -->
+            <article class="border-2 border-slate-900 rounded-xl bg-white p-5 sm:p-8 space-y-6 shadow-sm">
+              
+              <!-- Page 3 Header -->
+              <div class="border-b-2 border-slate-900 pb-4 space-y-2">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="px-2.5 py-0.5 rounded bg-blue-600 text-white font-mono text-xs font-semibold">Page 3: Sample 2, Revised Procedure</span>
+                  <span class="font-mono text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded border border-slate-200">
+                    Revision A | Estimated time: 10 minutes
+                  </span>
+                </div>
+                <h4 class="text-xl sm:text-2xl font-bold text-slate-900 pt-1">
+                  Procedure: Assemble a Peanut Butter and Jelly Sandwich
+                </h4>
+              </div>
+
+              <!-- Purpose & Scope -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <div>
+                  <span class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Purpose</span>
+                  <p class="text-sm text-slate-800">To make one peanut butter and jelly sandwich safely and consistently.</p>
+                </div>
+                <div>
+                  <span class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Scope</span>
+                  <p class="text-sm text-slate-800">Applies to a home kitchen using a jar of peanut butter, a jar of jelly, and a loaf of bread.</p>
+                </div>
+              </div>
+
+              <!-- Allergen WARNING Box -->
+              <div class="p-4 rounded-lg bg-red-50 border-l-4 border-red-600 text-red-950 flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <p class="text-sm sm:text-base">
+                  <strong class="font-mono uppercase tracking-wider text-red-800 mr-1">WARNING:</strong>
+                  Peanut butter can cause severe allergic reactions. Do not prepare or serve this sandwich to anyone with a peanut allergy.
+                </p>
+              </div>
+
+              <!-- Materials & Equipment -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border border-slate-200 rounded-lg p-4 text-sm">
+                <div>
+                  <h5 class="font-bold text-slate-900 mb-1.5">Materials</h5>
+                  <p class="text-slate-700">1 jar peanut butter, 1 jar jelly, 1 loaf bread (2 slices needed)</p>
+                </div>
+                <div>
+                  <h5 class="font-bold text-slate-900 mb-1.5">Equipment</h5>
+                  <p class="text-slate-700">1 plate, 2 butter knives, paper towels, sanitizing wipe</p>
+                  <p class="text-slate-600 mt-1 text-xs bg-slate-50 p-2 rounded border border-slate-200">
+                    <strong>If the bread is not sliced, also get:</strong> 1 serrated bread knife, 1 cutting board
+                  </p>
+                </div>
+              </div>
+
+              <!-- Section 1: Prepare the Work Area -->
+              <div class="space-y-2.5">
+                <h5 class="text-base sm:text-lg font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+                  Section 1: Prepare the Work Area
+                </h5>
+                <ol class="list-decimal list-inside space-y-1.5 text-sm sm:text-base text-slate-800">
+                  <li>Wash and dry your hands.</li>
+                  <li>Wipe the counter with a sanitizing wipe.</li>
+                  <li>Put the peanut butter and jelly on the counter.</li>
+                  <li>Put the bread on the counter.</li>
+                  <li>Put the plate on the counter.</li>
+                  <li>Put the two butter knives on a paper towel next to the plate.</li>
+                  <li>Close all doors and drawers.</li>
+                </ol>
+              </div>
+
+              <!-- Section 2: Prepare the Bread -->
+              <div class="space-y-3">
+                <h5 class="text-base sm:text-lg font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+                  Section 2: Prepare the Bread
+                </h5>
+                <ol class="list-decimal list-inside space-y-1.5 text-sm sm:text-base text-slate-800">
+                  <li>Open the bread bag.</li>
+                  <li>
+                    Check whether the bread is sliced.
+                    <ul class="list-disc list-inside pl-6 mt-1 space-y-1 text-slate-700 text-sm">
+                      <li><strong>If sliced:</strong> Remove 2 slices and put them flat on the plate. Go to Section 3.</li>
+                      <li><strong>If not sliced:</strong> Do steps 3 to 5.</li>
+                    </ul>
+                  </li>
+                </ol>
+
+                <!-- Sharp Knife WARNING -->
+                <div class="p-3.5 rounded-lg bg-red-50 border-l-4 border-red-600 text-red-950 flex items-start gap-2.5 text-sm">
+                  <svg class="w-4 h-4 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                  </svg>
+                  <p>
+                    <strong class="font-mono uppercase text-red-800 mr-1">WARNING:</strong>
+                    The bread knife is sharp. Keep your fingers away from the blade.
+                  </p>
+                </div>
+
+                <ol class="list-decimal list-inside space-y-1.5 text-sm sm:text-base text-slate-800">
+                  <li>Put the loaf on the cutting board.</li>
+                  <li>Cut 2 slices, each about 12 mm (½ in) thick, using a back-and-forth sawing motion.</li>
+                  <li>Put the 2 slices flat on the plate, side by side.</li>
+                  <li>Close and secure the bread bag.</li>
+                </ol>
+              </div>
+
+              <!-- Section 3: Add the Fillings -->
+              <div class="space-y-3">
+                <h5 class="text-base sm:text-lg font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+                  Section 3: Add the Fillings
+                </h5>
+
+                <!-- CAUTION Box -->
+                <div class="p-3.5 rounded-lg bg-amber-50 border-l-4 border-amber-500 text-amber-950 flex items-start gap-2.5 text-sm">
+                  <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                  <p>
+                    <strong class="font-mono uppercase text-amber-800 mr-1">CAUTION:</strong>
+                    Use a different knife for each filling. This keeps the peanut butter and jelly jars clean.
+                  </p>
+                </div>
+
+                <ol class="list-decimal list-inside space-y-1.5 text-sm sm:text-base text-slate-800">
+                  <li>Remove the lid from the peanut butter jar and set it on the counter.</li>
+                  <li>Scoop about 2 tablespoons of peanut butter with the first knife.</li>
+                  <li>Spread the peanut butter on slice 1, all the way to the edges.</li>
+                  <li>Put the first knife on the paper towel.</li>
+                  <li>Remove the lid from the jelly jar and set it on the counter.</li>
+                  <li>Scoop about 1 tablespoon of jelly with the second knife.</li>
+                  <li>Spread the jelly on slice 2, all the way to the edges.</li>
+                  <li>Put the second knife on the paper towel.</li>
+                  <li>Pick up slice 2 and place it on slice 1 with the jelly side down. Line up the edges.</li>
+                </ol>
+              </div>
+
+              <!-- Section 4: Clean Up -->
+              <div class="space-y-2.5">
+                <h5 class="text-base sm:text-lg font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+                  Section 4: Clean Up
+                </h5>
+                <ol class="list-decimal list-inside space-y-1.5 text-sm sm:text-base text-slate-800">
+                  <li>Screw the lids back onto both jars until hand-tight.</li>
+                  <li>Put the jars and bread back in their storage places.</li>
+                  <li>Throw away the paper towel.</li>
+                  <li>Wash the knives and any other tools you used.</li>
+                </ol>
+              </div>
+
+              <!-- Verification -->
+              <div class="p-4 rounded-lg bg-emerald-50/80 border border-emerald-200 space-y-2">
+                <h5 class="font-bold text-emerald-900 text-base flex items-center gap-2">
+                  <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Verification
+                </h5>
+                <p class="text-sm text-emerald-950 font-medium">The procedure is complete when:</p>
+                <ul class="list-disc list-inside space-y-1 text-sm text-emerald-950">
+                  <li>The sandwich has 2 slices with peanut butter and jelly between them, covering the bread edge to edge.</li>
+                  <li>Both jars are closed and put away.</li>
+                  <li>The work area is clean.</li>
+                </ul>
+              </div>
+
+            </article>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 3 PANEL: Wi-Fi Connected but No Internet (Flowchart)          -->
+        <!-- ================================================================= -->
+        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-btn-3" class="tab-panel hidden tab-panel-animate p-6 sm:p-8 lg:p-10 space-y-8">
+          
+          <!-- Header -->
+          <div class="border-b-2 border-slate-900 pb-4 space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="font-mono text-xs uppercase tracking-wider text-blue-600 font-semibold">Troubleshooting Logic &amp; Visio Diagram</span>
+              <span class="font-mono text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded border border-slate-200">Decision Flowchart</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Wi-Fi Connected but No Internet</h3>
+            <p class="text-sm sm:text-base text-slate-600">
+              A flowchart shows decisions visually, which is useful for troubleshooting. Here is the logic. I’ll draw it as a real diagram in the PDF.
+            </p>
+          </div>
+
+          <!-- Visual Visio-Style SVG Flowchart Diagram -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-6 overflow-x-auto">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold">Visual Decision Diagram (Visio Layout)</span>
+              <span class="text-xs text-slate-400 font-mono">Scroll horizontally on small screens &harr;</span>
+            </div>
+            
+            <svg viewBox="0 0 860 880" class="w-full min-w-[680px] h-auto mx-auto select-none" role="img" aria-label="Troubleshooting Flowchart for Wi-Fi Connected but No Internet">
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+                </marker>
+              </defs>
+
+              <!-- START Terminator -->
+              <rect x="130" y="16" width="260" height="54" rx="27" fill="#0f172a" />
+              <text x="260" y="38" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">START</text>
+              <text x="260" y="55" text-anchor="middle" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="11">“Connected” but web pages will not load</text>
+              <line x1="260" y1="70" x2="260" y2="104" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+
+              <!-- STEP 1 Diamond -->
+              <polygon points="260,106 395,166 260,226 125,166" fill="#eff6ff" stroke="#2563eb" stroke-width="2" />
+              <text x="260" y="158" text-anchor="middle" fill="#1e3a8a" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">1. Do other devices have</text>
+              <text x="260" y="174" text-anchor="middle" fill="#1e3a8a" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">internet on the same Wi-Fi?</text>
+
+              <!-- Step 1 NO Branch (Right) -->
+              <line x1="395" y1="166" x2="475" y2="166" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="415" y="146" width="32" height="18" rx="4" fill="#fee2e2" />
+              <text x="431" y="159" text-anchor="middle" fill="#991b1b" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">No</text>
+
+              <rect x="477" y="114" width="365" height="104" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+              <text x="492" y="135" fill="#0f172a" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Problem is the router or internet service:</text>
+              <text x="492" y="153" fill="#334155" font-family="Inter, sans-serif" font-size="11">1. Unplug router, wait 30 sec, plug back in, wait 2 min.</text>
+              <text x="492" y="171" fill="#334155" font-family="Inter, sans-serif" font-size="11">2. If it still fails, contact your internet provider.</text>
+              <rect x="772" y="185" width="56" height="22" rx="11" fill="#0f172a" />
+              <text x="800" y="200" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">End</text>
+
+              <!-- Step 1 YES Branch (Down) -->
+              <line x1="260" y1="226" x2="260" y2="268" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="268" y="236" width="36" height="18" rx="4" fill="#dcfce7" />
+              <text x="286" y="249" text-anchor="middle" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">Yes</text>
+
+              <!-- STEP 2 Diamond -->
+              <polygon points="260,270 385,322 260,374 135,322" fill="#eff6ff" stroke="#2563eb" stroke-width="2" />
+              <text x="260" y="326" text-anchor="middle" fill="#1e3a8a" font-family="Inter, sans-serif" font-size="12" font-weight="600">2. Is Airplane mode off?</text>
+
+              <!-- Step 2 NO Branch (Right) -->
+              <line x1="385" y1="322" x2="475" y2="322" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="415" y="302" width="32" height="18" rx="4" fill="#fee2e2" />
+              <text x="431" y="315" text-anchor="middle" fill="#991b1b" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">No</text>
+
+              <rect x="477" y="294" width="365" height="56" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+              <text x="492" y="326" fill="#0f172a" font-family="Inter, sans-serif" font-size="12">Turn Airplane mode off. Test again.</text>
+              <rect x="772" y="311" width="56" height="22" rx="11" fill="#0f172a" />
+              <text x="800" y="326" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">End</text>
+
+              <!-- Step 2 YES Branch (Down) -->
+              <line x1="260" y1="374" x2="260" y2="416" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="268" y="384" width="36" height="18" rx="4" fill="#dcfce7" />
+              <text x="286" y="397" text-anchor="middle" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">Yes</text>
+
+              <!-- STEP 3 Process + Decision -->
+              <rect x="135" y="418" width="250" height="40" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
+              <text x="260" y="442" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="12" font-weight="600">3. Restart the computer</text>
+              <line x1="260" y1="458" x2="260" y2="482" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+
+              <polygon points="260,484 385,532 260,580 135,532" fill="#eff6ff" stroke="#2563eb" stroke-width="2" />
+              <text x="260" y="536" text-anchor="middle" fill="#1e3a8a" font-family="Inter, sans-serif" font-size="12" font-weight="600">Does the internet work now?</text>
+
+              <!-- Step 3 YES Branch (Right) -->
+              <line x1="385" y1="532" x2="475" y2="532" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="413" y="512" width="36" height="18" rx="4" fill="#dcfce7" />
+              <text x="431" y="525" text-anchor="middle" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">Yes</text>
+              <rect x="477" y="516" width="76" height="32" rx="16" fill="#0f172a" />
+              <text x="515" y="536" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">End</text>
+
+              <!-- Step 3 NO Branch (Down) -->
+              <line x1="260" y1="580" x2="260" y2="620" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="268" y="590" width="32" height="18" rx="4" fill="#fee2e2" />
+              <text x="284" y="603" text-anchor="middle" fill="#991b1b" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">No</text>
+
+              <!-- STEP 4 Process + Decision -->
+              <rect x="115" y="622" width="290" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
+              <text x="260" y="647" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">4. Forget network &amp; reconnect (see Sample 3)</text>
+              <line x1="260" y1="664" x2="260" y2="686" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+
+              <polygon points="260,688 385,736 260,784 135,736" fill="#eff6ff" stroke="#2563eb" stroke-width="2" />
+              <text x="260" y="740" text-anchor="middle" fill="#1e3a8a" font-family="Inter, sans-serif" font-size="12" font-weight="600">Does the internet work now?</text>
+
+              <!-- Step 4 YES Branch (Right) -->
+              <line x1="385" y1="736" x2="475" y2="736" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="413" y="716" width="36" height="18" rx="4" fill="#dcfce7" />
+              <text x="431" y="729" text-anchor="middle" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">Yes</text>
+              <rect x="477" y="720" width="76" height="32" rx="16" fill="#0f172a" />
+              <text x="515" y="740" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">End</text>
+
+              <!-- Step 4 NO Branch (Down to Step 5) -->
+              <line x1="260" y1="784" x2="260" y2="814" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="268" y="790" width="32" height="18" rx="4" fill="#fee2e2" />
+              <text x="284" y="803" text-anchor="middle" fill="#991b1b" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">No</text>
+
+              <!-- STEP 5 Final Process Box -->
+              <rect x="40" y="816" width="700" height="52" rx="8" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+              <text x="56" y="838" fill="#0f172a" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">
+                5. Run built-in troubleshooter: Settings &gt; System &gt; Troubleshoot &gt; Other troubleshooters &gt; Network and Internet &gt; Run
+              </text>
+              <text x="56" y="856" fill="#334155" font-family="Inter, sans-serif" font-size="11">
+                Follow the on-screen instructions. If the problem remains, contact IT support.
+              </text>
+              <rect x="756" y="826" width="76" height="32" rx="16" fill="#0f172a" />
+              <text x="794" y="846" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">End</text>
+            </svg>
+          </div>
+
+          <!-- Structured Written Flowchart Logic (Exact Text Breakdown) -->
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">Structured Decision Logic</h4>
+
+            <div class="p-4 rounded-lg bg-slate-900 text-white text-sm sm:text-base">
+              <span class="font-mono text-xs uppercase tracking-wider text-blue-300 block mb-0.5">Start</span>
+              Computer says “Connected” but web pages will not load.
+            </div>
+
+            <div class="space-y-3">
+              <!-- Decision 1 -->
+              <div class="border border-slate-200 rounded-lg p-4 space-y-2.5 bg-white">
+                <div class="font-semibold text-slate-900 text-sm sm:text-base">
+                  1. Do other devices (phone, tablet) have internet on the same Wi-Fi?
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div class="p-3 rounded bg-red-50/70 border border-red-200 text-slate-800">
+                    <span class="font-mono font-bold text-red-700 mr-1">No:</span>
+                    The problem is the router or the internet service. Restart the router: unplug it, wait 30 seconds, plug it back in, wait 2 minutes. If it still fails, contact your internet provider. <strong class="font-mono">End.</strong>
+                  </div>
+                  <div class="p-3 rounded bg-emerald-50/70 border border-emerald-200 text-slate-800">
+                    <span class="font-mono font-bold text-emerald-700 mr-1">Yes:</span>
+                    Go to step 2.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decision 2 -->
+              <div class="border border-slate-200 rounded-lg p-4 space-y-2.5 bg-white">
+                <div class="font-semibold text-slate-900 text-sm sm:text-base">
+                  2. Is Airplane mode off?
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div class="p-3 rounded bg-red-50/70 border border-red-200 text-slate-800">
+                    <span class="font-mono font-bold text-red-700 mr-1">No:</span>
+                    Turn it off. Test again. <strong class="font-mono">End.</strong>
+                  </div>
+                  <div class="p-3 rounded bg-emerald-50/70 border border-emerald-200 text-slate-800">
+                    <span class="font-mono font-bold text-emerald-700 mr-1">Yes:</span>
+                    Go to step 3.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decision 3 -->
+              <div class="border border-slate-200 rounded-lg p-4 space-y-2.5 bg-white">
+                <div class="font-semibold text-slate-900 text-sm sm:text-base">
+                  3. Restart the computer. Does the internet work now?
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div class="p-3 rounded bg-emerald-50/70 border border-emerald-200 text-slate-800">
+                    <span class="font-mono font-bold text-emerald-700 mr-1">Yes:</span>
+                    <strong class="font-mono">End.</strong>
+                  </div>
+                  <div class="p-3 rounded bg-red-50/70 border border-red-200 text-slate-800">
+                    <span class="font-mono font-bold text-red-700 mr-1">No:</span>
+                    Go to step 4.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decision 4 -->
+              <div class="border border-slate-200 rounded-lg p-4 space-y-2.5 bg-white">
+                <div class="font-semibold text-slate-900 text-sm sm:text-base">
+                  4. Forget the network and reconnect (see Sample 3). Does the internet work now?
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div class="p-3 rounded bg-emerald-50/70 border border-emerald-200 text-slate-800">
+                    <span class="font-mono font-bold text-emerald-700 mr-1">Yes:</span>
+                    <strong class="font-mono">End.</strong>
+                  </div>
+                  <div class="p-3 rounded bg-red-50/70 border border-red-200 text-slate-800">
+                    <span class="font-mono font-bold text-red-700 mr-1">No:</span>
+                    Go to step 5.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="border border-slate-300 rounded-lg p-4 bg-slate-50 text-sm sm:text-base text-slate-800">
+                <strong class="text-slate-900">5. Run the built-in troubleshooter:</strong>
+                <code class="px-2 py-0.5 bg-white border border-slate-200 rounded font-mono text-xs sm:text-sm text-blue-800">
+                  Settings &gt; System &gt; Troubleshoot &gt; Other troubleshooters &gt; Network and Internet &gt; Run
+                </code>.
+                Follow the on-screen instructions. If the problem remains, contact IT support.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <p>Technical Writing Portfolio &mdash; Clear Procedures, Work Instructions &amp; Troubleshooting Documentation</p>
+      <p class="font-mono">Computer Information Systems</p>
+    </div>
+  </footer>
+
+  <!-- Interactive Script for Tab Switching, Photo Preview & Rewrite Layout Toggle -->
+  <script>
+    /**
+     * Switches the active writing sample tab and updates ARIA states and underline styles.
+     * @param {number} tabIndex - 1, 2, or 3
+     */
+    function switchTab(tabIndex) {
+      const totalTabs = 3;
+      for (let i = 1; i <= totalTabs; i++) {
+        const btn = document.getElementById(`tab-btn-${i}`);
+        const panel = document.getElementById(`tab-panel-${i}`);
+        const badge = btn.querySelector('span:first-child');
+
+        if (i === tabIndex) {
+          btn.setAttribute('aria-selected', 'true');
+          btn.classList.remove('border-transparent', 'text-slate-600', 'font-medium');
+          btn.classList.add('border-blue-600', 'text-blue-700', 'font-semibold');
+          badge.classList.remove('bg-slate-200', 'text-slate-700');
+          badge.classList.add('bg-blue-600', 'text-white');
+
+          panel.classList.remove('hidden');
+        } else {
+          btn.setAttribute('aria-selected', 'false');
+          btn.classList.remove('border-blue-600', 'text-blue-700', 'font-semibold');
+          btn.classList.add('border-transparent', 'text-slate-600', 'font-medium');
+          badge.classList.remove('bg-blue-600', 'text-white');
+          badge.classList.add('bg-slate-200', 'text-slate-700');
+
+          panel.classList.add('hidden');
+        }
+      }
+    }
+
+    /**
+     * Toggles between Stacked View and Side-by-Side Comparison in Tab 2 on large screens.
+     * @param {'stacked'|'split'} mode
+     */
+    function setRewriteLayout(mode) {
+      const container = document.getElementById('rewrite-container');
+      const stackedBtn = document.getElementById('view-stacked-btn');
+      const splitBtn = document.getElementById('view-split-btn');
+
+      if (mode === 'split') {
+        container.classList.remove('grid-cols-1');
+        container.classList.add('lg:grid-cols-2');
+        splitBtn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+        splitBtn.classList.remove('text-slate-600');
+        stackedBtn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+        stackedBtn.classList.add('text-slate-600');
+      } else {
+        container.classList.remove('lg:grid-cols-2');
+        container.classList.add('grid-cols-1');
+        stackedBtn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+        stackedBtn.classList.remove('text-slate-600');
+        splitBtn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+        splitBtn.classList.add('text-slate-600');
+      }
+    }
+
+    /**
+     * Handles client-side headshot photo preview so I can drop in my own portrait image.
+     */
+    document.getElementById('photo-upload-input').addEventListener('change', function (event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.getElementById('profile-photo');
+        const placeholder = document.getElementById('avatar-placeholder');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
