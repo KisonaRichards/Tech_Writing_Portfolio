@@ -75,21 +75,10 @@
         <div class="flex flex-col items-center shrink-0">
           <div class="relative group w-40 h-40 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-inner flex items-center justify-center">
             <!-- Default Professional Placeholder Graphic (Shown until user uploads photo) -->
-            <div id="avatar-placeholder" class="flex flex-col items-center justify-center text-slate-400 p-4 text-center select-none">
-              <svg class="w-16 h-16 text-slate-300 mb-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
-              </svg>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Your Portrait</span>
-            </div>
-
-            <!-- Uploaded Image Element -->
-            <img
-              id="profile-photo"
-              src="main/IMG_2449.png"
-              alt="Technical Writer Portrait"
-              class="hidden w-full h-full object-cover"
-            />
-<!--
+            <!-- Replace lines 78-92 with this clean, direct image block -->
+<div class="w-32 h-32 rounded-full overflow-hidden shadow-md border-2 border-slate-200 flex-shrink-0 bg-slate-100">
+    <img src="IMG_2449.png" alt="Technical Writer Portrait" class="w-full h-full object-cover" />
+</div>
             <!-- Hover Overlay Trigger -->
             <label
               for="photo-upload-input"
